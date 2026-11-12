@@ -1,0 +1,82 @@
+{
+  "business": {
+    "name": "Casa Aurora",
+    "shortName": "AURORA",
+    "tagline": "Cozinha feita para sentir",
+    "headline": "Antes da primeira garfada, uma experiência.",
+    "subtitle": "Escolha com os olhos. Explore nossos pratos em 3D e descubra como ficariam na sua mesa.",
+    "logo": "assets/logo.svg",
+    "accent": "#a85333",
+    "accentDark": "#733c2b",
+    "whatsapp": "",
+    "instagram": "",
+    "address": "Seu endereço aqui",
+    "openingHours": "Consulte o horário no estabelecimento",
+    "currency": "BRL"
+  },
+  "categories": [
+    { "id": "todos", "name": "Tudo" },
+    { "id": "hamburgueres", "name": "Hambúrgueres" },
+    { "id": "pizzas", "name": "Pizzas" },
+    { "id": "leves", "name": "Pratos leves" },
+    { "id": "sobremesas", "name": "Sobremesas" }
+  ],
+  "products": [
+    {
+      "id": "burger-aurora",
+      "name": "Aurora Burger",
+      "category": "hamburgueres",
+      "price": 39.9,
+      "description": "Pão macio, blend artesanal, queijo derretido, tomate e folhas frescas.",
+      "ingredients": ["Pão brioche", "Blend bovino", "Queijo", "Tomate", "Alface"],
+      "allergens": ["Glúten", "Leite"],
+      "prepTime": "20–25 min",
+      "badge": "Mais pedido",
+      "model": "assets/models/burger.glb",
+      "poster": "assets/posters/burger.svg",
+      "iosModel": ""
+    },
+    {
+      "id": "pizza-margherita",
+      "name": "Pizza Margherita",
+      "category": "pizzas",
+      "price": 56,
+      "description": "Massa leve, molho de tomate, muçarela cremosa e manjericão.",
+      "ingredients": ["Massa artesanal", "Molho de tomate", "Muçarela", "Manjericão"],
+      "allergens": ["Glúten", "Leite"],
+      "prepTime": "25–35 min",
+      "badge": "Favorito da casa",
+      "model": "assets/models/pizza.glb",
+      "poster": "assets/posters/pizza.svg",
+      "iosModel": ""
+    },
+    {
+      "id": "poke-salmao",
+      "name": "Poke de Salmão",
+      "category": "leves",
+      "price": 44.9,
+      "description": "Uma combinação fresca de salmão, arroz, abacate e vegetais.",
+      "ingredients": ["Salmão", "Arroz", "Abacate", "Pepino", "Edamame"],
+      "allergens": ["Peixe", "Soja"],
+      "prepTime": "15–20 min",
+      "badge": "Leve & fresco",
+      "model": "assets/models/poke.glb",
+      "poster": "assets/posters/poke.svg",
+      "iosModel": ""
+    },
+    {
+      "id": "brownie-sorvete",
+      "name": "Brownie & Gelato",
+      "category": "sobremesas",
+      "price": 27.9,
+      "description": "Brownie de chocolate com gelato de baunilha e calda de chocolate.",
+      "ingredients": ["Chocolate", "Baunilha", "Sorvete artesanal"],
+      "allergens": ["Glúten", "Ovos", "Leite"],
+      "prepTime": "10–15 min",
+      "badge": "Para adoçar",
+      "model": "assets/models/brownie.glb",
+      "poster": "assets/posters/brownie.svg",
+      "iosModel": ""
+    }
+  ]
+}

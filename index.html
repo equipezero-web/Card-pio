@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fbfaf8" />
+  <meta name="description" content="Descubra o cardápio em 3D e visualize pratos na sua mesa com realidade aumentada." />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="color-scheme" content="light" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>Cardápio 3D | Casa Aurora</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+  <script defer src="./js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#cardapio">Ir direto ao cardápio</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container topbar">
+        <a class="brand" href="#inicio" aria-label="Voltar ao início">
+          <img id="brandLogo" src="./assets/logo.svg" alt="Logotipo do estabelecimento" width="46" height="46" />
+          <span class="brand-copy"><strong id="brandName">Casa Aurora</strong><span id="brandTagline">Cozinha feita para sentir</span></span>
+        </a>
+        <div class="header-actions">
+          <span class="header-label"><span class="signal-dot"></span> CARDÁPIO INTERATIVO</span>
+          <a href="#cardapio" class="header-cta">Ver cardápio <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-mark">✦</span> SABOR QUE VOCÊ PODE EXPLORAR</div>
+            <h1 id="heroTitle">Antes da primeira garfada, <em>uma experiência.</em></h1>
+            <p id="heroSubtitle">Escolha com os olhos. Explore nossos pratos em 3D e descubra como ficariam na sua mesa.</p>
+            <div class="hero-buttons">
+              <a href="#cardapio" class="btn btn-primary">Explorar o cardápio <span aria-hidden="true">↘</span></a>
+              <button id="howBtn" class="btn btn-plain" type="button"><span class="play-ring" aria-hidden="true">▶</span> Como funciona</button>
+            </div>
+            <div class="hero-stats" aria-label="Recursos do cardápio">
+              <div><strong>360°</strong><span>gire o prato</span></div><i aria-hidden="true"></i><div><strong>3D</strong><span>veja detalhes</span></div><i aria-hidden="true"></i><div><strong>AR</strong><span>veja na mesa*</span></div>
+            </div>
+          </div>
+          <div class="hero-art">
+            <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+            <span class="hero-floating-tag tag-top"><span class="star-icon">✳</span> uma nova forma<br/> de escolher</span>
+            <div class="hero-stage" id="heroStage" aria-label="Modelo 3D em destaque">
+              <img class="hero-placeholder" id="heroPoster" src="./assets/posters/burger.svg" alt="Prato em destaque" />
+              <model-viewer id="heroViewer" src="./assets/models/burger.glb" alt="Hambúrguer em 3D" camera-controls auto-rotate auto-rotate-delay="4500" rotation-per-second="12deg" shadow-intensity="1" exposure="1.05" environment-image="neutral" interaction-prompt="none" loading="eager" touch-action="pan-y" camera-orbit="35deg 68deg 0.48m" min-camera-orbit="auto auto 0.31m" max-camera-orbit="auto auto 0.75m"></model-viewer>
+            </div>
+            <div class="hero-float-bottom"><span class="hero-round-icon">⟳</span><span><strong>Experimente girar</strong><small>Toque e arraste o prato</small></span></div>
+            <span class="hero-decor" aria-hidden="true">✺</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="experience-band" aria-label="Sobre a experiência">
+        <div class="container experience-content"><span class="experience-pill">✦ EXPERIÊNCIA IMERSIVA</span><p>Veja. <em>Gire.</em> Imagine na sua mesa.</p><span class="experience-mini">Sem baixar aplicativo</span></div>
+      </section>
+
+      <section id="cardapio" class="menu-section container" aria-labelledby="menuTitle">
+        <div class="section-heading"><div><span class="overline">PREPARADO PARA SURPREENDER</span><h2 id="menuTitle">Nosso <em>cardápio</em></h2><p>Um olhar mais próximo sobre tudo o que preparamos para você.</p></div><div class="section-mini-icon" aria-hidden="true">✳</div></div>
+        <div class="menu-tools">
+          <div id="categoryFilters" class="category-filters" role="group" aria-label="Filtrar por categoria"></div>
+          <label class="search-field" for="searchInput"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.9" cy="10.9" r="6.7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="searchInput" type="search" placeholder="Buscar um prato..." autocomplete="off" /></label>
+        </div>
+        <div class="grid-meta"><span id="resultsCount" role="status" aria-live="polite">Carregando pratos...</span><span><span aria-hidden="true">↻</span> Pratos em 3D interativo</span></div>
+        <div id="productGrid" class="product-grid" aria-live="polite"></div>
+        <div id="emptyState" class="empty-state" hidden><span>⌕</span><h3>Nenhum prato encontrado</h3><p>Tente outro nome ou selecione uma categoria diferente.</p><button id="clearSearch" class="btn btn-primary" type="button">Ver todos os pratos</button></div>
+      </section>
+
+      <section class="ar-explainer"><div class="container explainer-grid"><div class="explainer-icon" aria-hidden="true"><svg viewBox="0 0 120 120" width="92" height="92"><path d="m60 10 43 25v49l-43 25-43-25V35L60 10Z" fill="none" stroke="currentColor" stroke-width="4"/><path d="m17 35 43 26 43-26M60 61v48" fill="none" stroke="currentColor" stroke-width="4"/><path d="m41 48 40-24" stroke="currentColor" stroke-width="3" opacity=".45"/></svg></div><div><span class="overline">UMA EXPERIÊNCIA ALÉM DO CARDÁPIO</span><h2>Quer ver o prato <em>na sua mesa?</em></h2><p>Abra os detalhes de um item e toque em “Ver na minha mesa”. Em aparelhos compatíveis, a realidade aumentada detecta superfícies para posicionar o modelo 3D no ambiente.</p><button type="button" id="arHelpBtn" class="text-link">Entenda a realidade aumentada <span aria-hidden="true">↗</span></button></div></div></section>
+    </main>
+
+    <footer class="footer"><div class="container footer-grid"><div class="footer-brand"><img id="footerLogo" src="./assets/logo.svg" width="52" height="52" alt=""/><div><strong id="footerName">Casa Aurora</strong><span>Uma experiência em cada escolha.</span></div></div><div class="footer-info"><span id="footerAddress">Seu endereço aqui</span><span id="footerHours">Consulte o horário no estabelecimento</span></div><div class="footer-bottom">Cardápio 3D • Sem necessidade de cadastro <span>AR disponível em dispositivos compatíveis*</span></div></div></footer>
+  </div>
+
+  <dialog class="product-dialog" id="productDialog" aria-labelledby="dialogTitle">
+    <div class="modal-body"><div class="dialog-head"><span class="modal-eyebrow">EXPERIÊNCIA EM 3D</span><button class="icon-button" data-close="productDialog" aria-label="Fechar detalhes" type="button">✕</button></div>
+      <div class="dialog-grid"><div class="dialog-media"><div class="dialog-photo-bg"><img id="dialogPoster" src="./assets/posters/burger.svg" alt=""/><model-viewer id="dialogViewer" camera-controls ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor" ar-scale="auto" environment-image="neutral" shadow-intensity="1.2" exposure="1.05" touch-action="pan-y" interaction-prompt="none" camera-orbit="35deg 68deg 0.46m" min-camera-orbit="auto auto 0.25m" max-camera-orbit="auto auto 0.85m"><button slot="ar-button" class="native-ar-slot" id="nativeArButton" type="button">Abrir na câmera</button></model-viewer></div><div class="rotate-hint">⟳ <span>Arraste para girar em 360° · Aproxime para ver detalhes</span></div></div>
+      <div class="dialog-info"><span id="dialogCategory" class="dialog-category">ESPECIALIDADE DA CASA</span><h2 id="dialogTitle">Nome do prato</h2><div id="dialogPrice" class="dialog-price">R$ 0,00</div><p id="dialogDescription" class="dialog-description"></p><div class="detail-group"><strong>O que vem no prato</strong><div id="dialogIngredients" class="ingredients"></div></div><div class="detail-group"><strong>Informações</strong><p id="dialogMeta" class="detail-meta"></p></div><div class="dialog-actions"><button id="arLaunchBtn" class="btn btn-primary btn-wide" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 2 8 4.5v11L12 22l-8-4.5v-11L12 2Z"/><path d="m4 6.5 8 5 8-5M12 11.5V22"/></svg> Abrir câmera e ver na mesa <span aria-hidden="true">↗</span></button><a id="orderLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-wide" hidden>Consultar pelo WhatsApp ↗</a></div><p class="ar-disclaimer">* Requer HTTPS, câmera, navegador e aparelho compatíveis. A visualização é ilustrativa; tamanho e aparência reais podem variar.</p></div></div>
+    </div>
+  </dialog>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle"><div class="help-inner"><button class="icon-button help-close" type="button" data-close="helpDialog" aria-label="Fechar">✕</button><div class="help-glyph">⌗</div><span class="overline">COMO FUNCIONA</span><h2 id="helpTitle">Seu pedido começa com uma experiência.</h2><ol><li><strong>Escolha um prato</strong><span>Explore o cardápio e abra um item.</span></li><li><strong>Gire o modelo 3D</strong><span>Arraste com o dedo e aproxime para ver os detalhes.</span></li><li><strong>Toque em “Ver na minha mesa”</strong><span>Se o celular for compatível, o modo AR abre a câmera. Mova o celular para identificar uma superfície e posicionar o modelo.</span></li></ol><p class="help-footnote">No computador ou em dispositivos sem AR, a rotação em 3D continua disponível. Alguns modelos de iPhone podem precisar de arquivos USDZ específicos.</p><button class="btn btn-primary btn-wide" type="button" data-close="helpDialog">Entendi</button></div></dialog>
+
+  <dialog id="editorDialog" class="editor-dialog" aria-labelledby="editorTitle"><div class="editor-shell"><div class="editor-top"><div><span class="overline">PERSONALIZAÇÃO LOCAL</span><h2 id="editorTitle">Editar o cardápio</h2></div><button class="icon-button" type="button" data-close="editorDialog" aria-label="Fechar editor">✕</button></div><p class="editor-note">Esta edição funciona somente como prévia neste navegador. Para que todos os clientes vejam as mudanças, exporte o arquivo <code>menu.json</code> e substitua o arquivo no site publicado. Este editor não possui autenticação nem publica alterações automaticamente.</p><form id="editorForm"><fieldset><legend>Identidade do restaurante</legend><div class="editor-fields"><label>Nome da empresa<input name="name" required maxlength="80" /></label><label>Slogan<input name="tagline" maxlength="110" /></label><label class="span-2">Título da apresentação<input name="headline" maxlength="150" /></label><label class="span-2">Texto de apoio<textarea name="subtitle" rows="2" maxlength="260"></textarea></label><label>Cor principal<input name="accent" type="color" /></label><label>URL da logomarca<input name="logo" placeholder="assets/logo.svg" /></label><label>WhatsApp (DDI + DDD + número)<input name="whatsapp" inputmode="tel" placeholder="5581999999999" /></label><label>Endereço<input name="address" /></label><label class="span-2">Horário de funcionamento<input name="openingHours" /></label><label class="span-2">Categorias (separadas por vírgula)<input name="categories" placeholder="Hambúrgueres, Bebidas, Sobremesas" /></label></div></fieldset><fieldset><legend>Pratos do cardápio</legend><p class="field-help">Para cada prato, hospede o arquivo GLB na pasta <code>assets/models</code> e informe o caminho. Para fotos ilustrativas, use SVG/PNG/JPG locais. USDZ é opcional para iOS.</p><div id="editorProducts" class="editor-products"></div><button id="addProductBtn" type="button" class="btn btn-outline">+ Adicionar prato</button></fieldset><div class="editor-actions"><button id="resetEditorBtn" type="button" class="btn btn-plain">Descartar prévia</button><button id="importJsonBtn" type="button" class="btn btn-outline">Importar JSON</button><input id="importJsonInput" type="file" accept="application/json,.json" hidden /><button type="submit" class="btn btn-outline">Aplicar prévia</button><button id="exportJsonBtn" type="button" class="btn btn-primary">Exportar menu.json ↓</button></div></form></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>window.__MENU_APP_VERSION__='1.0.0';</script>
+</body>
+</html>
