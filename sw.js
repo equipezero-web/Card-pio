@@ -1,5 +1,5 @@
 /* PWA estática. Cache de recursos locais; JSON atualizado preferencialmente pela rede. */
-const VERSION = 'cardapio3d-v1.2.0';
+const VERSION = 'cardapio3d-v1.3.0';
 const STATIC_CACHE = `${VERSION}-static`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const MODEL_VIEWER_CDN = 'https://unpkg.com/@google/model-viewer@4.1.0/dist/model-viewer.min.js';
@@ -7,6 +7,7 @@ const SHELL = [
   './','./index.html','./css/style.css','./js/app.js','./manifest.webmanifest',
   './icon-192.png','./icon-512.png','./assets/logo.svg','./data/menu.json',
   './assets/img/pratos/prato-executivo-real.webp',
+  './assets/img/pratos/prato-especial-real-movimento.webp',
   './assets/posters/burger.svg','./assets/posters/pizza.svg',
   './assets/posters/poke.svg','./assets/posters/brownie.svg',
   './assets/models/burger.glb','./assets/models/pizza.glb',
