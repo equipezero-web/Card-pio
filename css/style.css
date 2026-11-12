@@ -12,3 +12,13 @@ dialog{border:0;padding:0;box-shadow:0 30px 90px rgba(20,23,22,.25);color:var(--
 @media(max-width:410px){.hero h1{font-size:42px}.hero-art{height:345px}.hero-floating-tag{font-size:9px;padding:8px 10px}.hero-float-bottom{bottom:0;padding:9px 11px}.hero-float-bottom strong{font-size:10px}.experience-pill{display:none}.experience-content{justify-content:center}.experience-content p{font-size:21px}.product-visual{height:154px}.product-grid{gap:10px}.card-content{padding:13px 11px}.card-name-price h3{font-size:13px}.card-price{font-size:13px}.card-description{min-height:55px;font-size:9px}.card-label{font-size:8px;padding:6px 8px}.footer-grid{grid-template-columns:1fr}.footer-info{align-items:flex-start}.footer-bottom{flex-direction:column;gap:8px}.dialog-photo-bg{height:31vh}.dialog-info{padding:12px 18px 25px}}
 @media(max-width:350px){.product-grid{grid-template-columns:1fr}.product-visual{height:240px}.card-description{min-height:0}.card-bottom{flex-direction:row;align-items:center}.card-price{font-size:15px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Imagens reais sem modelo 3D: preservar nitidez e não simular AR. */
+.product-visual .product-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;filter:none;transform:none}
+.product-visual .photo-indicator{position:absolute;right:14px;bottom:13px;z-index:2;background:rgba(255,255,255,.94);border:1px solid #e9e6df;color:#55564e;border-radius:30px;padding:8px 11px;font-size:9px;font-weight:800;letter-spacing:.08em}
+.hero-stage.is-photo .hero-placeholder{position:relative;width:94%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:30px;opacity:1;filter:none;box-shadow:0 22px 70px rgba(31,31,26,.13)}
+.hero-stage.is-photo::after{display:none}
+.dialog-photo-bg.is-photo{background:#fff}
+.dialog-photo-bg.is-photo>img{opacity:1;filter:none;object-fit:contain}
+#heroViewer[hidden],#dialogViewer[hidden],#arLaunchBtn[hidden],.rotate-hint[hidden],.hero-float-bottom[hidden]{display:none!important}
+@media(max-width:760px){.hero-stage.is-photo .hero-placeholder{width:100%;border-radius:21px;box-shadow:0 14px 35px rgba(31,31,26,.10)}}

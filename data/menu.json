@@ -15,21 +15,69 @@
     "currency": "BRL"
   },
   "categories": [
-    { "id": "todos", "name": "Tudo" },
-    { "id": "hamburgueres", "name": "Hambúrgueres" },
-    { "id": "pizzas", "name": "Pizzas" },
-    { "id": "leves", "name": "Pratos leves" },
-    { "id": "sobremesas", "name": "Sobremesas" }
+    {
+      "id": "todos",
+      "name": "Tudo"
+    },
+    {
+      "id": "executivos",
+      "name": "Pratos executivos"
+    },
+    {
+      "id": "hamburgueres",
+      "name": "Hambúrgueres"
+    },
+    {
+      "id": "pizzas",
+      "name": "Pizzas"
+    },
+    {
+      "id": "leves",
+      "name": "Pratos leves"
+    },
+    {
+      "id": "sobremesas",
+      "name": "Sobremesas"
+    }
   ],
   "products": [
+    {
+      "id": "executivo-grelhado-foto-real",
+      "name": "Prato Executivo Grelhado",
+      "category": "executivos",
+      "price": null,
+      "description": "Uma refeição completa com arroz branco, feijão, batatas fritas, salada fresca e filé grelhado.",
+      "ingredients": [
+        "Arroz branco",
+        "Feijão",
+        "Batatas fritas",
+        "Salada fresca",
+        "Filé grelhado"
+      ],
+      "allergens": [],
+      "prepTime": "",
+      "badge": "Foto real",
+      "model": "",
+      "poster": "assets/img/pratos/prato-executivo-real.webp",
+      "iosModel": ""
+    },
     {
       "id": "burger-aurora",
       "name": "Aurora Burger",
       "category": "hamburgueres",
       "price": 39.9,
       "description": "Pão macio, blend artesanal, queijo derretido, tomate e folhas frescas.",
-      "ingredients": ["Pão brioche", "Blend bovino", "Queijo", "Tomate", "Alface"],
-      "allergens": ["Glúten", "Leite"],
+      "ingredients": [
+        "Pão brioche",
+        "Blend bovino",
+        "Queijo",
+        "Tomate",
+        "Alface"
+      ],
+      "allergens": [
+        "Glúten",
+        "Leite"
+      ],
       "prepTime": "20–25 min",
       "badge": "Mais pedido",
       "model": "assets/models/burger.glb",
@@ -42,8 +90,16 @@
       "category": "pizzas",
       "price": 56,
       "description": "Massa leve, molho de tomate, muçarela cremosa e manjericão.",
-      "ingredients": ["Massa artesanal", "Molho de tomate", "Muçarela", "Manjericão"],
-      "allergens": ["Glúten", "Leite"],
+      "ingredients": [
+        "Massa artesanal",
+        "Molho de tomate",
+        "Muçarela",
+        "Manjericão"
+      ],
+      "allergens": [
+        "Glúten",
+        "Leite"
+      ],
       "prepTime": "25–35 min",
       "badge": "Favorito da casa",
       "model": "assets/models/pizza.glb",
@@ -56,8 +112,17 @@
       "category": "leves",
       "price": 44.9,
       "description": "Uma combinação fresca de salmão, arroz, abacate e vegetais.",
-      "ingredients": ["Salmão", "Arroz", "Abacate", "Pepino", "Edamame"],
-      "allergens": ["Peixe", "Soja"],
+      "ingredients": [
+        "Salmão",
+        "Arroz",
+        "Abacate",
+        "Pepino",
+        "Edamame"
+      ],
+      "allergens": [
+        "Peixe",
+        "Soja"
+      ],
       "prepTime": "15–20 min",
       "badge": "Leve & fresco",
       "model": "assets/models/poke.glb",
@@ -70,8 +135,16 @@
       "category": "sobremesas",
       "price": 27.9,
       "description": "Brownie de chocolate com gelato de baunilha e calda de chocolate.",
-      "ingredients": ["Chocolate", "Baunilha", "Sorvete artesanal"],
-      "allergens": ["Glúten", "Ovos", "Leite"],
+      "ingredients": [
+        "Chocolate",
+        "Baunilha",
+        "Sorvete artesanal"
+      ],
+      "allergens": [
+        "Glúten",
+        "Ovos",
+        "Leite"
+      ],
       "prepTime": "10–15 min",
       "badge": "Para adoçar",
       "model": "assets/models/brownie.glb",

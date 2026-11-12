@@ -2,6 +2,12 @@
 
 Site para restaurantes e empresas locais venderem a experiência de um **cardápio em 3D, com realidade aumentada (AR) nos celulares compatíveis**. Projeto independente, sem Supabase, sem banco de dados, sem login e sem backend de pedidos.
 
+## Exemplo com prato fotografado
+
+O primeiro item do `data/menu.json` usa a fotografia real enviada como referência visual, em `assets/img/pratos/prato-executivo-real.webp`. Foi cadastrado como **Prato Executivo Grelhado** (proteína não identificada com certeza na fotografia). O preço foi deixado **sem valor**, então aparece “Consultar valor” até que o restaurante confirme. Esse item **não possui modelo GLB**: exibe foto nítida no card, no destaque e nos detalhes, sem habilitar botão AR ou afirmar que a foto pode ser girada em 3D. Outros itens demonstrativos continuam em 3D.
+
+Para uso comercial, confirme que o restaurante tem os direitos de uso da foto (o arquivo original tem nome de fotografia de banco de imagens), além de validar o nome, ingredientes, preço e alérgenos. Para ativar 3D/AR do prato real, produza um modelo GLB apropriado e, no `data/menu.json`, preencha o campo `model`.
+
 ## O que está incluído
 
 - Home de alto impacto, identificação do restaurante e cardápio com preços.
@@ -62,7 +68,7 @@ Imprima o PNG gerado na mesa, embalagem ou balcão.
 
 **Importante:** URLs de modelos no JSON apenas apontam para arquivos já hospedados. O editor não faz upload de GLB, imagens ou USDZ. Coloque esses arquivos na pasta do projeto e atualize os respectivos caminhos. Recomenda-se usar GLB otimizado, com dimensões próximas às reais (unidades em metros). Use USDZ no campo `iosModel` quando precisar de maior previsibilidade em iPhones.
 
-Após alterar os modelos ou arquivos estáticos, atualize a versão `VERSION` no `sw.js` e publique novamente. O JSON usa estratégia **network-first**, para refletir atualizações quando online, com fallback para cache offline.
+Após alterar os modelos ou arquivos estáticos, atualize a versão `VERSION` no `sw.js` e publique novamente. Fotos reais não precisam de GLB, mas não permitem rotação 3D ou AR. O JSON usa estratégia **network-first**, para refletir atualizações quando online, com fallback para cache offline.
 
 ### WhatsApp
 
