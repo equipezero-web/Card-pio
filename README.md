@@ -2,6 +2,24 @@
 
 Site para restaurantes e empresas locais venderem a experiência de um **cardápio em 3D, com realidade aumentada (AR) nos celulares compatíveis**. Projeto independente, sem Supabase, sem banco de dados, sem login e sem backend de pedidos.
 
+## Demonstração: fotografia original com movimento de profundidade
+
+O prato em destaque agora utiliza a nova fotografia recortada e enviada para o projeto, em
+`assets/img/pratos/prato-especial-real-movimento.webp`.
+
+O efeito `presentation: "photo-motion"` aplica uma oscilação automática suave e inclinação
+interativa (ponteiro no desktop; toque e arraste no celular), usando perspectiva CSS 3D.
+A fotografia não é substituída por modelagem gerada, preservando sua aparência real.
+**É um efeito 2,5D, não é um objeto 3D volumétrico ou fotogrametria.** Não permite
+mostrar lados não fotografados nem usar AR do próprio prato com fidelidade.
+Por isso o botão AR é ocultado apenas para esse item. Os outros pratos com GLB
+permanecem com visualização 3D e AR compatível.
+
+Para um prato fotorealista giratório em 360° e AR, fotografe o alimento de
+muitos ângulos (fotogrametria ou digitalização 3D) e gere um modelo GLB texturizado,
+com USDZ se necessário no iOS. Confirmar licenças de uso comercial da fotografia
+antes de utilizar o protótipo com restaurantes.
+
 ## Prato com fotografia real e modelo 3D
 
 O **Prato Executivo Grelhado** usa a imagem enviada em `assets/img/pratos/prato-executivo-real.webp` e um **arquivo GLB tridimensional real** em `assets/models/prato-executivo-reconstruido.glb`.
