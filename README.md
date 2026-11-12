@@ -2,11 +2,15 @@
 
 Site para restaurantes e empresas locais venderem a experiência de um **cardápio em 3D, com realidade aumentada (AR) nos celulares compatíveis**. Projeto independente, sem Supabase, sem banco de dados, sem login e sem backend de pedidos.
 
-## Exemplo com prato fotografado
+## Prato com fotografia real e modelo 3D
 
-O primeiro item do `data/menu.json` usa a fotografia real enviada como referência visual, em `assets/img/pratos/prato-executivo-real.webp`. Foi cadastrado como **Prato Executivo Grelhado** (proteína não identificada com certeza na fotografia). O preço foi deixado **sem valor**, então aparece “Consultar valor” até que o restaurante confirme. Esse item **não possui modelo GLB**: exibe foto nítida no card, no destaque e nos detalhes, sem habilitar botão AR ou afirmar que a foto pode ser girada em 3D. Outros itens demonstrativos continuam em 3D.
+O **Prato Executivo Grelhado** usa a imagem enviada em `assets/img/pratos/prato-executivo-real.webp` e um **arquivo GLB tridimensional real** em `assets/models/prato-executivo-reconstruido.glb`.
 
-Para uso comercial, confirme que o restaurante tem os direitos de uso da foto (o arquivo original tem nome de fotografia de banco de imagens), além de validar o nome, ingredientes, preço e alérgenos. Para ativar 3D/AR do prato real, produza um modelo GLB apropriado e, no `data/menu.json`, preencha o campo `model`.
+O modelo 3D foi construido proceduralmente com pratos e alimentos volumetricos: arroz, feijao, batatas fritas, file grelhado e salada, posicionado de acordo com a fotografia e em escala aproximada (prato de cerca de 30 cm). Nao e uma imagem plana, mas tambem **nao e um escaneamento fotogrametrico nem replica fiel ou fotorrealista**. As regioes invisiveis na foto foram estimadas, e cores, texturas, ingredientes e dimensoes sao ilustrativos. O arquivo GLB habilita a rotacao por toque, zoom e o botao de AR no Android compativel, com Quick Look em iOS quando disponivel.
+
+**Teste em celular:** publique em HTTPS, toque no prato e escolha "Abrir camera e ver na mesa". Android precisa de suporte ARCore / Scene Viewer ou WebXR; iPhone precisa de suporte Quick Look e pode exigir um USDZ separado. O modelo existente permite experimentar a funcionalidade, mas nao garante AR em todos os aparelhos.
+
+O preco foi deixado **sem valor** ate confirmacao do restaurante. A foto enviada tem nome de um banco de imagens; confirme que existe licenca para uso comercial antes de entregar esse exemplo a um cliente. Valide tambem os ingredientes exibidos (tipo de file nao confirmado), os alergenos e a aparencia do prato que a empresa realmente vende.
 
 ## O que está incluído
 

@@ -1,5 +1,5 @@
 /* PWA estática. Cache de recursos locais; JSON atualizado preferencialmente pela rede. */
-const VERSION = 'cardapio3d-v1.1.0';
+const VERSION = 'cardapio3d-v1.2.0';
 const STATIC_CACHE = `${VERSION}-static`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 const MODEL_VIEWER_CDN = 'https://unpkg.com/@google/model-viewer@4.1.0/dist/model-viewer.min.js';
@@ -10,6 +10,7 @@ const SHELL = [
   './assets/posters/burger.svg','./assets/posters/pizza.svg',
   './assets/posters/poke.svg','./assets/posters/brownie.svg',
   './assets/models/burger.glb','./assets/models/pizza.glb',
+  './assets/models/prato-executivo-reconstruido.glb',
   './assets/models/poke.glb','./assets/models/brownie.glb'
 ];
 self.addEventListener('install',event=>{
