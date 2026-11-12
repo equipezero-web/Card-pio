@@ -74,20 +74,38 @@
     $('heroSubtitle').textContent=b.subtitle||'';
     const featured=config.products[0];
     if (featured) {
-      const heroModel=safeUrl(featured.model,'');
+      const photoMotion=featured.presentation==='photo-motion';
+      const heroModel=photoMotion?'':safeUrl(featured.model,'');
+      const img=safeUrl(featured.poster,'./assets/posters/burger.svg');
       $('heroStage').classList.toggle('is-photo',!heroModel);
-      $('heroStage').setAttribute('aria-label',heroModel?`Modelo 3D de ${featured.name}`:`Foto de ${featured.name}`);
+      $('heroStage').classList.toggle('is-motion-photo',photoMotion);
+      $('heroStage').setAttribute('aria-label',heroModel?`Modelo 3D de ${featured.name}`:`Fotografia de ${featured.name}`);
+      $('heroPhotoMotion').hidden=!photoMotion;
+      $('heroPoster').hidden=photoMotion;
+      if(photoMotion){
+        $('heroMotionImage').src=img;
+        $('heroPhotoMotion').setAttribute('aria-label',`Fotografia real de ${featured.name} com movimento de perspectiva`);
+      }
+      $('heroViewer').hidden=!heroModel;
       if(heroModel){
-        $('heroViewer').hidden=false;
         $('heroViewer').setAttribute('src',heroModel);
         $('heroViewer').setAttribute('alt',`Modelo 3D de ${featured.name}`);
-      }else{
-        $('heroViewer').removeAttribute('src');
-        $('heroViewer').hidden=true;
-      }
-      $('heroPoster').src=safeUrl(featured.poster,'./assets/posters/burger.svg');
+      }else $('heroViewer').removeAttribute('src');
+      $('heroPoster').src=img;
       $('heroPoster').alt=`Foto de ${featured.name}`;
-      qs('.hero-float-bottom').hidden=!heroModel;
+      qs('.hero-float-bottom').hidden=!heroModel&&!photoMotion;
+      qs('.hero-float-bottom strong').textContent=photoMotion?'Fotografia em movimento':'Experimente girar';
+      qs('.hero-float-bottom small').textContent=photoMotion?'Mova o dedo para inclinar':'Toque e arraste o prato';
+      const stats=qs('.hero-stats');
+      if(stats){
+        const values=photoMotion
+          ? [['REAL','foto original'],['2,5D','movimento visual'],['3D','outros pratos']]
+          : [['360°','gire o prato'],['3D','veja detalhes'],['AR','veja na mesa*']];
+        stats.querySelectorAll('div').forEach((node,i)=>{
+          node.querySelector('strong').textContent=values[i][0];
+          node.querySelector('span').textContent=values[i][1];
+        });
+      }
     }
   }
   function renderFilters() {
@@ -100,13 +118,17 @@
     }
   }
   function viewerMarkup(product) {
-    const model=safeUrl(product.model,'');
+    const moving=product.presentation==='photo-motion';
+    const model=moving?'':safeUrl(product.model,'');
     const poster=safeUrl(product.poster,'./assets/posters/burger.svg');
-    const photoMarkup=model
-      ? `<img class="poster-img" src="${safeText(poster)}" alt="" loading="lazy"/><model-viewer src="${safeText(model)}" alt="Modelo 3D de ${safeText(product.name)}" camera-controls auto-rotate auto-rotate-delay="8000" rotation-per-second="9deg" shadow-intensity=".8" exposure="1.05" environment-image="neutral" interaction-prompt="none" loading="lazy" touch-action="pan-y" camera-orbit="35deg 68deg 0.44m" min-camera-orbit="auto auto 0.25m" max-camera-orbit="auto auto 0.8m"></model-viewer>`
-      : `<img class="product-photo" src="${safeText(poster)}" alt="Foto do prato ${safeText(product.name)}" loading="lazy"/>`;
-    const indicator=model
-      ? '<span class="rotate-indicator" aria-hidden="true">⟳</span>'
+    const photoMarkup=moving
+      ? `<div class="photo-motion-frame card-motion" data-photo-motion role="img" aria-label="Foto real de ${safeText(product.name)} com movimento de perspectiva"><div class="photo-motion-plane"><img src="${safeText(poster)}" alt="" loading="lazy" /></div></div>`
+      : model
+        ? `<img class="poster-img" src="${safeText(poster)}" alt="" loading="lazy"/><model-viewer src="${safeText(model)}" alt="Modelo 3D de ${safeText(product.name)}" camera-controls auto-rotate auto-rotate-delay="8000" rotation-per-second="9deg" shadow-intensity=".8" exposure="1.05" environment-image="neutral" interaction-prompt="none" loading="lazy" touch-action="pan-y" camera-orbit="35deg 68deg 0.44m" min-camera-orbit="auto auto 0.25m" max-camera-orbit="auto auto 0.8m"></model-viewer>`
+        : `<img class="product-photo" src="${safeText(poster)}" alt="Foto do prato ${safeText(product.name)}" loading="lazy"/>`;
+    const indicator=moving
+      ? '<span class="photo-indicator">MOVA A FOTO</span>'
+      : model?'<span class="rotate-indicator" aria-hidden="true">⟳</span>'
       : '<span class="photo-indicator">FOTO</span>';
     return `<div class="product-visual">${photoMarkup}${product.badge?`<span class="card-label">${safeText(product.badge)}</span>`:''}${indicator}</div>`;
   }
@@ -137,23 +159,35 @@
     $('dialogMeta').textContent=`Preparo: ${product.prepTime||'Consulte o estabelecimento'}${product.allergens?.length?' · Alérgenos: '+product.allergens.join(', '):''}`;
     $('dialogPoster').src=safeUrl(product.poster,'./assets/posters/burger.svg');
     $('dialogPoster').alt=`Foto do prato ${product.name}`;
-    const model=safeUrl(product.model,'');
+    const moving=product.presentation==='photo-motion';
+    const model=moving?'':safeUrl(product.model,'');
     const has3D=Boolean(model);
-    qs('.dialog-photo-bg').classList.toggle('is-photo',!has3D);
-    qs('.modal-eyebrow').textContent=has3D?'EXPERIÊNCIA EM 3D':'FOTO REAL DO PRATO';
-    qs('.rotate-hint').hidden=!has3D;
+    const detail=qs('.dialog-photo-bg');
+    detail.classList.toggle('is-photo',!has3D);
+    detail.classList.toggle('is-motion-photo',moving);
+    $('dialogPhotoMotion').hidden=!moving;
+    $('dialogPoster').hidden=moving;
+    if(moving){
+      $('dialogMotionImage').src=safeUrl(product.poster,'./assets/posters/burger.svg');
+      $('dialogPhotoMotion').setAttribute('aria-label',`Foto real de ${product.name} com movimento de perspectiva`);
+    }
+    qs('.modal-eyebrow').textContent=moving?'FOTOGRAFIA REAL EM MOVIMENTO':has3D?'EXPERIÊNCIA EM 3D':'FOTO DO PRATO';
+    qs('.rotate-hint').hidden=!has3D&&!moving;
+    qs('.rotate-hint span').textContent=moving
+      ? 'Mova o dedo para inclinar a fotografia · Efeito visual de profundidade'
+      : 'Arraste para girar em 360° · Aproxime para ver detalhes';
     $('arLaunchBtn').hidden=!has3D;
-    qs('.ar-disclaimer').textContent=has3D
-      ? '* Requer HTTPS, câmera, navegador e aparelho compatíveis. A visualização é ilustrativa; tamanho e aparência reais podem variar.'
-      : 'Este item apresenta uma foto real. Para girar o prato em 3D e vê-lo na mesa, será necessário adicionar um modelo tridimensional próprio.';
+    qs('.ar-disclaimer').textContent=moving
+      ? 'A imagem permanece real. O movimento é um efeito visual 2,5D: não mostra os lados invisíveis nem permite visualizar este prato com fidelidade na câmera.'
+      : has3D
+        ? '* Requer HTTPS, câmera, navegador e aparelho compatíveis. A visualização é ilustrativa; tamanho e aparência reais podem variar.'
+        : 'Este item apresenta uma foto. Para girar em 3D e visualizar na mesa, adicione um modelo tridimensional.';
     const viewer=$('dialogViewer');
     viewer.hidden=!has3D;
     if(has3D){
       viewer.setAttribute('src',model);
       viewer.setAttribute('alt',`Prato ${product.name} para girar em 3D`);
-    }else{
-      viewer.removeAttribute('src');
-    }
+    }else viewer.removeAttribute('src');
     if(has3D && product.iosModel) viewer.setAttribute('ios-src',safeUrl(product.iosModel,''));else viewer.removeAttribute('ios-src');
     const phone=(config.business.whatsapp||'').replace(/\D/g,'');
     const order=$('orderLink');
@@ -166,6 +200,39 @@
   }
   function openHelp() {$('helpDialog').showModal();}
   function wireInteractions() {
+    const motionFrame=target=>target instanceof Element?target.closest('[data-photo-motion]'):null;
+    const resetMotion=frame=>{
+      frame.classList.remove('is-interacting');
+      frame.style.removeProperty('--motion-x');
+      frame.style.removeProperty('--motion-y');
+      delete frame.dataset.pointerHeld;
+    };
+    document.addEventListener('pointerdown',event=>{
+      const frame=motionFrame(event.target);
+      if(frame&&!frame.hidden)frame.dataset.pointerHeld=String(event.pointerId);
+    },{passive:true});
+    document.addEventListener('pointermove',event=>{
+      const frame=motionFrame(event.target);
+      if(!frame||frame.hidden||event.pointerType==='touch'&&frame.dataset.pointerHeld!==String(event.pointerId))return;
+      const rect=frame.getBoundingClientRect();
+      const x=Math.max(-1,Math.min(1,(event.clientX-(rect.left+rect.width/2))/(rect.width/2)));
+      const y=Math.max(-1,Math.min(1,(event.clientY-(rect.top+rect.height/2))/(rect.height/2)));
+      frame.classList.add('is-interacting');
+      frame.style.setProperty('--motion-x',(-y*11).toFixed(2)+'deg');
+      frame.style.setProperty('--motion-y',(x*15).toFixed(2)+'deg');
+    },{passive:true});
+    document.addEventListener('pointerup',event=>{
+      document.querySelectorAll('[data-photo-motion][data-pointer-held]').forEach(frame=>{
+        if(frame.dataset.pointerHeld===String(event.pointerId))resetMotion(frame);
+      });
+    },{passive:true});
+    document.addEventListener('pointercancel',event=>{
+      document.querySelectorAll('[data-photo-motion][data-pointer-held]').forEach(frame=>resetMotion(frame));
+    },{passive:true});
+    document.addEventListener('pointerout',event=>{
+      const frame=motionFrame(event.target);
+      if(frame&&!frame.contains(event.relatedTarget)&&event.pointerType!=='touch')resetMotion(frame);
+    },{passive:true});
     $('searchInput').addEventListener('input',renderProducts);
     $('clearSearch').addEventListener('click',()=>{activeCategory='todos';$('searchInput').value='';renderFilters();renderProducts();});
     $('howBtn').addEventListener('click',openHelp);
@@ -238,6 +305,11 @@
       ${inputHtml('Categoria','productCategory',category,'required')}
       ${inputHtml('Tempo de preparo','productPrep',product.prepTime||'')}
       ${inputHtml('Etiqueta','productBadge',product.badge||'')}
+      <label>Apresentação<select name="productPresentation">
+        <option value="auto" ${!product.presentation||product.presentation==='auto'?'selected':''}>Modelo 3D (se houver) ou foto</option>
+        <option value="photo-motion" ${product.presentation==='photo-motion'?'selected':''}>Foto real com movimento</option>
+        <option value="photo" ${product.presentation==='photo'?'selected':''}>Apenas fotografia</option>
+      </select></label>
       ${inputHtml('Arquivo 3D (GLB)','productModel',product.model||'','','model-input')}
       ${inputHtml('Imagem do prato (JPG, PNG, WebP ou SVG)','productPoster',product.poster||'','','model-input')}
       ${inputHtml('Modelo para iPhone (USDZ, opcional)','productIos',product.iosModel||'','','model-input')}
@@ -255,7 +327,7 @@
       const category=field('productCategory')||'Outros';
       if (!names.some(n=>slug(n)===slug(category))) names.push(category);
       return {id:item.dataset.productId||`produto-${index}`,name:field('productName'),price:field('productPrice')===''?null:Number(field('productPrice').replace(',','.'))||0,
-        category:slug(category),prepTime:field('productPrep'),badge:field('productBadge'),model:field('productModel'),poster:field('productPoster'),
+        category:slug(category),prepTime:field('productPrep'),badge:field('productBadge'),presentation:field('productPresentation')==='auto'?'':field('productPresentation'),model:field('productModel'),poster:field('productPoster'),
         iosModel:field('productIos'),description:field('productDescription'),ingredients:field('productIngredients').split(',').map(s=>s.trim()).filter(Boolean),
         allergens:field('productAllergens').split(',').map(s=>s.trim()).filter(Boolean)};
     });

@@ -4,7 +4,7 @@
     "shortName": "AURORA",
     "tagline": "Cozinha feita para sentir",
     "headline": "Antes da primeira garfada, uma experiência.",
-    "subtitle": "Escolha com os olhos. Veja nossos pratos em 3D e, no celular compatível, visualize uma prévia na sua mesa.",
+    "subtitle": "A comida como ela é: fotografias reais com movimento e modelos 3D nos itens que oferecem essa experiência.",
     "logo": "assets/logo.svg",
     "accent": "#a85333",
     "accentDark": "#733c2b",
@@ -43,23 +43,24 @@
   "products": [
     {
       "id": "executivo-grelhado-foto-real",
-      "name": "Prato Executivo Grelhado",
+      "name": "Prato Executivo Especial",
       "category": "executivos",
       "price": null,
-      "description": "Uma refeição completa com arroz branco, feijão, batatas fritas, salada fresca e filé grelhado.",
+      "description": "Prato completo com arroz, batatas fritas, filé grelhado, salada e acompanhamentos. Imagem real com movimento de perspectiva.",
       "ingredients": [
-        "Arroz branco",
-        "Feijão",
+        "Arroz",
         "Batatas fritas",
-        "Salada fresca",
-        "Filé grelhado"
+        "Filé grelhado",
+        "Salada",
+        "Acompanhamentos"
       ],
       "allergens": [],
       "prepTime": "",
-      "badge": "Novo · 3D ilustrativo",
-      "model": "assets/models/prato-executivo-reconstruido.glb",
-      "poster": "assets/img/pratos/prato-executivo-real.webp",
-      "iosModel": ""
+      "badge": "Foto real em movimento",
+      "model": "",
+      "poster": "assets/img/pratos/prato-especial-real-movimento.webp",
+      "iosModel": "",
+      "presentation": "photo-motion"
     },
     {
       "id": "burger-aurora",
